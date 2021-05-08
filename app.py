@@ -7,8 +7,6 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-from db import db
-
 # CRUD api - create read update delete api (most apis out there)
 
 app = Flask(__name__)
@@ -35,19 +33,9 @@ api.add_resource(StoreList, '/stores')
 # there). if __name__ == '__main__' makes sure that this isn't run when
 # importing app.py
 
-'''
-db.init_app(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
+# this is not run by Heroku. Only when running it locally
 if __name__ == '__main__':
+    from db import db
     db.init_app(app)
-
-    @app.before_first_request
-    def create_tables():
-        db.create_all()
-
     app.run(port = 5000, debug=True) #debug=True gives nice debug messages
-'''
