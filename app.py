@@ -16,8 +16,20 @@ app = Flask(__name__)
 # it imports the Store Resource which imports the StoreModel which tells it
 # to create the table 'stores'.
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+
+# The command
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+# will not work look here https://stackoverflow.com/questions/66690321/flask-and-heroku-sqlalchemy-exc-nosuchmoduleerror-cant-load-plugin-sqlalchemy
+# to fix it do this:
+
+sql_database_uri = os.environ.get('DATABASE_URL','sqlite:///data.db')
+if 'postgres://' in sql_database_uri:
+    sql_database_uri = f'postgresql{sql_database_uri.split('postgres')[-1]}'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = sql_database_uri
+
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # switches off some changes tracker
 app.secret_key = 'jose'
 api = Api(app)
