@@ -25,7 +25,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite://
 
 sql_database_uri = os.environ.get('DATABASE_URL','sqlite:///data.db')
 if 'postgres://' in sql_database_uri:
-    sql_database_uri = f'postgresql{sql_database_uri.split('postgres')[-1]}'
+    sql_database_uri = 'postgresql'+sql_database_uri.split('postgres')[-1]
 
 app.config['SQLALCHEMY_DATABASE_URI'] = sql_database_uri
 
