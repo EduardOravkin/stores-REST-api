@@ -21,10 +21,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # switches off some changes
 app.secret_key = 'jose'
 api = Api(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 jwt = JWT(app, authenticate, identity) # new endpoint /auth
 
 api.add_resource(Item, '/item/<string:name>') # passing <string:name> into the get method of Student
@@ -40,4 +36,9 @@ api.add_resource(StoreList, '/stores')
 # importing app.py
 if __name__ == '__main__':
     db.init_app(app)
+
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
+        
     app.run(port = 5000, debug=True) #debug=True gives nice debug messages
