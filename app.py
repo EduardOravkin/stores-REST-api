@@ -35,6 +35,7 @@ api.add_resource(StoreList, '/stores')
 # there). if __name__ == '__main__' makes sure that this isn't run when
 # importing app.py
 
+'''
 db.init_app(app)
 
 @app.before_first_request
@@ -49,3 +50,4 @@ if __name__ == '__main__':
         db.create_all()
 
     app.run(port = 5000, debug=True) #debug=True gives nice debug messages
+'''
