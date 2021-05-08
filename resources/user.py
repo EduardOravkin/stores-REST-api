@@ -26,12 +26,4 @@ class UserRegister(Resource):
         return {"message": "User created successfully"}, 201
 
     def get(self):
-        connection = sqlite3.connect('data.db')
-        cursor = connection.cursor()
-
-        query = "SELECT * FROM users"
-
-        result = cursor.execute(query)
-
-        output = {row[0]:{"username":row[1], "password":row[2]} for row in result}
-        return output
+        return {'register': [user.json() for user in UserModel.query.all()]}
