@@ -34,12 +34,13 @@ api.add_resource(StoreList, '/stores')
 # then Python automatically runs all of the code (e.g. if you have a print()
 # there). if __name__ == '__main__' makes sure that this isn't run when
 # importing app.py
+
 db.init_app(app)
 
 @app.before_first_request
 def create_tables():
     db.create_all()
-    
+
 if __name__ == '__main__':
     db.init_app(app)
 
