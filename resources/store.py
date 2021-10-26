@@ -25,7 +25,7 @@ class Store(Resource):
         try:
             store.save_to_db()
         except:
-            return {'message' : "An error ocurred inserting the store."}, 500 # internal server error
+            return {'message' : "An error ocurred inserting the store."}, 500 
 
         return store.json(), 201
 

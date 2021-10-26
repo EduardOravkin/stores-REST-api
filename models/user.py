@@ -1,13 +1,12 @@
 import sqlite3
 from db import db
 
-# this is an API to communicate with the users table
-# in the database
+# this is an API to communicate with the users table in the database
 class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(80)) #   80 characters maximum
+    username = db.Column(db.String(80)) # 80 characters maximum
     password = db.Column(db.String(80))
 
 

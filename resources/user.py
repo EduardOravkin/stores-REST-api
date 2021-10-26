@@ -14,7 +14,6 @@ class UserRegister(Resource):
 
 
     def post(self):
-        #why not self.parser.parse_args ?
         data = UserRegister.parser.parse_args()
 
         if UserModel.find_by_username(data["username"]) is not None:
